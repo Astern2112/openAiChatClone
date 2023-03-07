@@ -40,6 +40,12 @@ app.post('/', async (req, res) => {
     });
   } catch (error) {
     console.error(error);
+    res
+      .status(429)
+      .send(
+        error ||
+          'Rate limit reached for requests or You exceeded your current quota, please check your plan and billing details'
+      );
     res.status(500).send(error || 'Something went wrong');
   }
 });
